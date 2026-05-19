@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAF6EF;
+  --foreground: #1a1208;
+  --accent: #C41E3A;
+  --gold: #F0E8D8;
+  --border-light: #e0d5c0;
+  --border-dark: rgba(255, 255, 255, 0.15);
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.cn {
+  font-family: 'LXGW WenKai', serif;
+}
+
+/* Dropcap for first paragraph in content sections */
+.content-section > p:first-of-type::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  color: #C41E3A;
+  float: left;
+  line-height: 0.9;
+  padding-right: 8px;
+  padding-top: 2px;
+}
