@@ -3,6 +3,14 @@ export interface Section {
   title: string;
 }
 
+export interface ArticleMeta {
+  title: string;
+  slug: string;
+  date: string;
+  description: string;
+  readingTime: string;
+}
+
 export interface Festival {
   slug: string;
   title: string;
@@ -24,6 +32,7 @@ export interface Festival {
     dosAndDonts: { do: string[]; dont: string[] };
     giftGuide: string[];
   };
+  articles?: ArticleMeta[];
   relatedSlugs: string[];
 }
 
@@ -81,6 +90,25 @@ export const festivals: Festival[] = [
         "Dragon boat memorabilia — small model boats, festival-themed art prints, or calligraphy scrolls featuring poems by Qu Yuan — make meaningful gifts for friends who are interested in Chinese culture. These items carry the festival's spirit far beyond the holiday itself.",
       ],
     },
+    articles: [
+      {
+        title:
+          "10 Regional Varieties of Zongzi You Need to Try",
+        slug: "zongzi-regional-varieties",
+        date: "2026-05-21",
+        description:
+          "From sweet red bean in the north to savory pork belly in the south, explore the incredible diversity of zongzi across China.",
+        readingTime: "6 min read",
+      },
+      {
+        title: "Your Complete Guide to Watching Dragon Boat Races",
+        slug: "dragon-boat-racing-guide",
+        date: "2026-05-15",
+        description:
+          "Everything a foreigner needs to know about attending dragon boat races — where to go, what to bring, and how to enjoy the spectacle.",
+        readingTime: "7 min read",
+      },
+    ],
     relatedSlugs: ["chinese-new-year", "mid-autumn-festival", "lantern-festival"],
   },
   {
@@ -131,6 +159,7 @@ export const festivals: Festival[] = [
         "Fruit baskets — especially with oranges and tangerines (symbolizing luck) — are safe and appreciated.",
       ],
     },
+    articles: [],
     relatedSlugs: ["lantern-festival", "dragon-boat-festival", "mid-autumn-festival"],
   },
   {

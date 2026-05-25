@@ -1,9 +1,21 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getFestival, getRelatedFestivals, sections } from "@/lib/festivals";
+import { getFestivalArticles } from "@/lib/articles";
+import {
+  getAllFestivals,
+  getFestival,
+  getRelatedFestivals,
+  sections,
+} from "@/lib/festivals";
 
 interface Props {
   params: { slug: string };
+}
+
+export function generateStaticParams() {
+  return getAllFestivals().map((festival) => ({
+    slug: festival.slug,
+  }));
 }
 
 export default function FestivalDetailPage({ params }: Props) {
@@ -14,6 +26,7 @@ export default function FestivalDetailPage({ params }: Props) {
   }
 
   const related = getRelatedFestivals(festival.relatedSlugs);
+  const articles = getFestivalArticles(festival.slug);
 
   return (
     <>
@@ -369,6 +382,88 @@ export default function FestivalDetailPage({ params }: Props) {
           </section>
         </div>
       </div>
+
+      {/* More Articles */}
+      {articles.length > 0 && (
+        <section className="px-4 pb-12">
+          <div className="max-w-5xl mx-auto">
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 22,
+                color: "#1a1208",
+                marginBottom: 20,
+              }}
+            >
+              More Articles about This Festival
+            </h2>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "1px",
+                background: "#e0d5c0",
+              }}
+              className="max-md:grid-cols-1 max-lg:grid-cols-2"
+            >
+              {articles.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/festivals/${festival.slug}/${article.slug}`}
+                  className="group block bg-white p-5 transition-colors hover:bg-[#FAF6EF]"
+                >
+                  <p
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontStyle: "italic",
+                      fontSize: 12,
+                      color: "#8a6a3a",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    {article.date} &middot; {article.readingTime}
+                  </p>
+                  <h3
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 17,
+                      color: "#1a1208",
+                      lineHeight: 1.35,
+                      marginTop: 8,
+                    }}
+                  >
+                    {article.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 14,
+                      color: "#1a1208",
+                      lineHeight: 1.55,
+                      marginTop: 10,
+                    }}
+                  >
+                    {article.description}
+                  </p>
+                  <p
+                    className="group-hover:opacity-70"
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontStyle: "italic",
+                      fontSize: 13,
+                      color: "#C41E3A",
+                      textAlign: "right",
+                      marginTop: 14,
+                    }}
+                  >
+                    Read article &rarr;
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Related Festivals */}
       {related.length > 0 && (
