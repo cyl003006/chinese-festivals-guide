@@ -399,18 +399,22 @@ export default function FestivalDetailPage({ params }: Props) {
             </h2>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
+                display: "flex",
+                overflowX: "auto",
+                scrollSnapType: "x mandatory",
                 gap: "1px",
                 background: "#e0d5c0",
+                alignItems: "stretch",
+                WebkitOverflowScrolling: "touch",
               }}
-              className="max-md:grid-cols-1 max-lg:grid-cols-2"
+              className="article-scroll-row items-stretch"
             >
               {articles.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/festivals/${festival.slug}/${article.slug}`}
-                  className="group block bg-white p-5 transition-colors hover:bg-[#FAF6EF]"
+                  className="article-scroll-card group flex h-full flex-shrink-0 flex-col bg-white p-5 transition-colors hover:bg-[#FAF6EF]"
+                  style={{ height: "100%", scrollSnapAlign: "start" }}
                 >
                   <p
                     style={{
@@ -419,6 +423,9 @@ export default function FestivalDetailPage({ params }: Props) {
                       fontSize: 12,
                       color: "#8a6a3a",
                       letterSpacing: "0.02em",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     {article.date} &middot; {article.readingTime}
@@ -428,8 +435,13 @@ export default function FestivalDetailPage({ params }: Props) {
                       fontFamily: "'Playfair Display', serif",
                       fontSize: 17,
                       color: "#1a1208",
-                      lineHeight: 1.35,
+                      lineHeight: 1.4,
                       marginTop: 8,
+                      minHeight: "calc(2 * 1.4em)",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
                     }}
                   >
                     {article.title}
@@ -439,21 +451,26 @@ export default function FestivalDetailPage({ params }: Props) {
                       fontFamily: "'Cormorant Garamond', serif",
                       fontSize: 14,
                       color: "#1a1208",
-                      lineHeight: 1.55,
+                      lineHeight: 1.6,
                       marginTop: 10,
+                      minHeight: "calc(3 * 1.6em)",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
                     }}
+                    className="overflow-hidden"
                   >
                     {article.description}
                   </p>
                   <p
-                    className="group-hover:opacity-70"
+                    className="mt-auto pt-[14px] group-hover:opacity-70"
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
                       fontStyle: "italic",
                       fontSize: 13,
                       color: "#C41E3A",
                       textAlign: "right",
-                      marginTop: 14,
                     }}
                   >
                     Read article &rarr;

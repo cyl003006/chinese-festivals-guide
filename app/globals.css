@@ -92,3 +92,27 @@ h1, h2, h3, h4, h5, h6 {
 .article-content a:hover {
   color: #8a1024;
 }
+
+.article-scroll-row {
+  scrollbar-width: none;
+}
+
+.article-scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.article-scroll-card {
+  width: calc(33.333% - 1px);
+}
+
+@media (max-width: 1023px) {
+  .article-scroll-card {
+    width: calc(50% - 1px);
+  }
+}
+
+@media (max-width: 767px) {
+  .article-scroll-card {
+    width: calc(83.333% - 1px);
+  }
+}
